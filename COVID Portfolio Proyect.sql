@@ -102,7 +102,7 @@ JOIN CovidVaccinations vac
 	ON dea.location=vac.location
 	and dea.date=vac.date
 WHERE dea.continent is not  null
-order by 2,3
+ORDER BY 2,3
 
 SELECT dea.continent, dea.location, dea.date, dea.population,vac.new_vaccinations
 , SUM(CONVERT(int, vac.new_vaccinations)) OVER (PARTITION by dea.location Order by dea.location, dea.date) AS RollingPeopleVaccinated
@@ -112,12 +112,12 @@ JOIN CovidVaccinations vac
 	ON dea.location=vac.location
 	and dea.date=vac.date
 WHERE dea.continent is not  null
-order by 2,3
+ORDER BY 2,3
 
 --USE CTE
 
 With PopvsVac (Continent, Location, Date, Population, New_Vaccinations, RollingPeopleVaccinated)
-as
+AS
 (
 SELECT dea.continent, dea.location, dea.date, dea.population,vac.new_vaccinations
 , SUM(CONVERT(int, vac.new_vaccinations)) OVER (PARTITION by dea.location Order by dea.location, dea.date) AS RollingPeopleVaccinated
